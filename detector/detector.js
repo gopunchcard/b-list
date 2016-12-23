@@ -1,5 +1,4 @@
 var noble = require('noble');
-//var Scanner = require('bluetooth-scanner');
 var xhr = require('xhr');
 
 noble.on('stateChange', function (state) {
@@ -14,7 +13,7 @@ noble.on('stateChange', function (state) {
 noble.on('discover', function (peripheral) {
 	var macAddress = peripheral.address;
 	console.log('found device: ', macAddress);
-	xhr.post('http://localhost:3010/bluetooth', function (err, resp) {
+	xhr.post('http://10.0.1.184:3010/bluetooth', function (err, resp) {
 		console.log(resp.body)
 	})
 });
