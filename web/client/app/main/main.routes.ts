@@ -6,5 +6,9 @@ export default function($stateProvider) {
     .state('main', {
       url: '/',
       template: '<main></main>'
+    })
+    .state('register', {
+      url: '/register',
+      template: '<register></register>'
     });
 }

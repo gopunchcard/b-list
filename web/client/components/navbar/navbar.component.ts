@@ -4,8 +4,11 @@ const angular = require('angular');
 
 export class NavbarComponent {
   menu = [{
-    'title': 'Home',
+    'title': 'List',
     'state': 'main'
+  }, {
+    'title': 'Register',
+    'state': 'register'
   }];
   isCollapsed = true;
 
