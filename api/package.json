@@ -1,0 +1,14 @@
+{
+  "name": "b-list-api",
+  "version": "0.0.1",
+  "description": "use read and update b-list in-out storage",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mark-z",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
