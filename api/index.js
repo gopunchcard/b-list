@@ -11,6 +11,10 @@ app.get('/', function(req, res){
     res.send('Hello World');
 });
 
+app.get('/users', function(req, res){
+    res.json([{name: "test", mac: "123", room: "1", date: "2016-12-12"}]);
+});
+
 app.post('/bluetooth', upload.array(), function (req, res, next) {
     console.log(req.body);
     res.json(req.body);
