@@ -19,6 +19,7 @@ function init(){
 function setupRouting(){
     app.get('/', helloWorld);
     app.get('/users', getUsers);
+    app.post('/user', upload.array(), saveUser);
     app.post('/bluetooth', upload.array(), saveBluetoothDection);
 
     return;
@@ -34,13 +35,16 @@ function startListener(){
 function helloWorld(req, res){
     res.send('Hello World');
 }
+
 function getUsers(req, res){
-    res.json([{name: "test", mac: "123", room: "1", date: "2016-12-12"}]);
+    console.log(storage.values());
+    res.json(storage.values());
 }
+
 function saveBluetoothDection (req, res, next) {
 
     getRecord(req.body.mac)
-    .then(function(record){return createUpdateRecord(record, req.body.mac);})
+    .then(function(record){return createUpdateRecordDetection(record, req.body.mac);})
     .then(saveRecord)
     .then(function(){
         console.info('save success');
@@ -52,7 +56,7 @@ function saveBluetoothDection (req, res, next) {
 function getRecord(mac){
     return storage.getItem(mac);
 }
-function createUpdateRecord(record, mac){
+function createUpdateRecordDetection(record, mac){
     if(!record){
         record = {};
     }
@@ -65,17 +69,29 @@ function saveRecord(record){
     return storage.setItem(record.mac, record);
 }
 
+function saveUser(req, res, next){
+    getRecord(req.body.mac)
+    .then(function(record){return createUpdateRecord(record, req.body);})
+    .then(saveRecord)
+    .then(function(){
+        console.info('save success');
+        res.send('save success');
+    })
+    .catch(function(err){console.error('save fail for', req.body.mac, err);});
+}
+function createUpdateRecordDetection(record, incoming){
+    if(!record){
+        record = {};
+    }
+    _.extend(record, incoming);
+    
+    return record;
+}
+
 function logError(err){
     console.error(err);
 }
 
-function storageTest(){
-    storage.setItem('mac', '1234').then(function(){
-        return storage.getItem('name');
-    })
-    .then(function(value){
-        console.log(value);
-    });
-}
+
 
 init();
