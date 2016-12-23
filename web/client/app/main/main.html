@@ -1,18 +1,71 @@
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
+<!doctype html>
+<head>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-    </div>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+  <meta name="description" content="kevin newcombe | front end web developer">
+  <link rel="shortcut icon" href="favicon.ico">
+  <title>The B-List</title>
+<link type="text/css" rel="stylesheet" href="_assets/style.css"/>
+</head>
+<body>
+  <div class="interior-body">
+    <header>
+      <div class="main-left">
+        <h2>WELCOME TO UNIT B!</h2>
+        <p>BELOW IS A LIST OF EVERYONE WHO&rsquo;S CURRENTLY IN THE BUILDING.</p>
+      </div>
+      <div class="main-right">
+        <img src="_assets/logo-blist.svg" />
+      </div>
+    </header>
+
+    <article>
+      <div class="main-left">
+        <table cellpadding="0" cellspacing="0">
+          <tr>
+            <th class="column-name">
+              <span class="title">NAME</span>
+              <span class="underline">----</span>
+            </th>
+            <th class="column-company">
+              <span class="title">COMPANY</span>
+              <span class="underline">-------</span>
+            </th>
+            <th class="column-room">
+              <span class="title">ROOM</span>
+              <span class="underline">----</span>
+            </th>
+          </tr>
+
+          <tr>
+            <td>G. stroumboulopoulos</td>
+            <td>CANADIAN BROADCASTING CORPORATION</td>
+            <td>123</td>
+          </tr>
+
+
+          <tr>
+            <td>R. NUGENT-HOPKINS</td>
+            <td>EDMONTON OILERS</td>
+            <td>456</td>
+          </tr>
+
+          <tr>
+            <td>An incredibly long name that we're dropping in to see how this thing handles wrapping.</td>
+            <td>CANADIAN BROADCASTING CORPORATION</td>
+            <td>123</td>
+          </tr>
+
+          <tr>
+            <td>L. MARTIN</td>
+            <td>ANOTHER COMPANY NAME</td>
+            <td>789</td>
+          </tr>
+
+        </table>
+      </div>
+    </article>
   </div>
-</div>
+</body>
+</html>
