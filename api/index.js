@@ -42,7 +42,6 @@ function helloWorld(req, res){
 }
 
 function getUsers(req, res){
-    console.log(storage.values());
     res.json(storage.values());
 }
 
