@@ -6,3 +6,5 @@ web/typings/
 .DS_Store
 build/
 dist/
+
+.node-persist/
