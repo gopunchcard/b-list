@@ -11,6 +11,9 @@
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
-    "multer": "^1.2.1"
+    "lodash": "^4.17.2",
+    "multer": "^1.2.1",
+    "node-persist": "^2.0.7",
+    "q": "^1.4.1"
   }
 }
