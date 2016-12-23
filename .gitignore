@@ -1,0 +1,8 @@
+node_modules/
+bower_components/
+*.log
+web/typings/
+
+.DS_Store
+build/
+dist/
