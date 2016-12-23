@@ -1,25 +1,43 @@
 var express = require('express');
 var bodyParser = require('body-parser');
-var multer = require('multer'); // v1.0.5
-var upload = multer(); // for parsing multipart/form-data
+var multer = require('multer');
+var storage = require('node-persist');
 
-var app = express();
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+function init(){
+    var upload = multer(); // for parsing multipart/form-data
+    var app = express();
+    app.use(bodyParser.json()); // for parsing application/json
+    app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
-app.get('/', function(req, res){
+    storage.init()
+    .then(setupRouting)
+    .then(startListener);
+}
+function setupRouting(){
+    app.get('/', helloWorld);
+
+    app.get('/users', getUsers);
+
+    app.post('/bluetooth', upload.array(), saveBluetoothDection);
+}
+function startListener(){
+    app.listen(3010, function(){
+        console.log('app listening on pot 3010!');
+    });
+}
+
+function helloWorld(req, res){
     res.send('Hello World');
-});
-
-app.get('/users', function(req, res){
+}
+function getUsers(req, res){
     res.json([{name: "test", mac: "123", room: "1", date: "2016-12-12"}]);
-});
-
-app.post('/bluetooth', upload.array(), function (req, res, next) {
+}
+function saveBluetoothDection (req, res, next) {
     console.log(req.body);
     res.json(req.body);
-});
 
-app.listen(3010, function(){
-    console.log('app listening on pot 3010!');
-});
+    storage.setItem('mac', req.body.mac)
+}
+
+
+init();
