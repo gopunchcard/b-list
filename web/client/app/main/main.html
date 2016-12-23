@@ -1,3 +1,38 @@
-<div>This is the main view.</div>
-<pre>{{mainCtrl.macList}}</pre>
-Kaplah!
+<div class="interior-body mac-list">
+  <header>
+    <div class="main-left">
+      <h2>WELCOME TO UNIT B!</h2>
+      <p>BELOW IS A LIST OF EVERYONE WHO&rsquo;S CURRENTLY IN THE BUILDING.</p>
+    </div>
+    <div class="main-right">
+      <img src="app/main/_assets/logo-blist.svg" />
+    </div>
+  </header>
+
+  <article>
+    <div class="main-left">
+      <table cellpadding="0" cellspacing="0">
+        <tr>
+          <th class="column-name">
+            <span class="title">NAME</span>
+            <span class="underline">----</span>
+          </th>
+          <th class="column-room">
+            <span class="title">ROOM</span>
+            <span class="underline">-------</span>
+          </th>
+          <th class="column-status">
+            <span class="title">RU HERE?</span>
+            <span class="underline">----</span>
+          </th>
+        </tr>
+        <tr ng-repeat="macEntry in  mainCtrl.macList">
+          <td>{{macEntry.name}}</td>
+          <td>{{macEntry.room}}</td>
+          <td>{{macEntry.date}}</td>
+        </tr>
+
+      </table>
+    </div>
+  </article>
+</div>

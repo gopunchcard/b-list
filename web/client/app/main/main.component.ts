@@ -12,16 +12,22 @@ export class MainComponent {
   constructor($q : ng.IQService) {
     this.macList = [
     {
-      Mac: "a4-5e-60-c8-9f-34",
-      Name: "Ian Phillipchuk"
+      mac: "a4-5e-60-c8-9f-34",
+      name: "Ian Phillipchuk",
+      room: "1",
+      date: this.inOut(new Date())
     }, 
     {
-      Mac: "a4-5e-60-c8-9f-35",
-      Name: "Mark Zacharias"
+      mac: "a4-5e-60-c8-9f-35",
+      name: "Mark Zacharias",
+      room: "1",
+      date: this.inOut(new Date())
     },
     {
-      Mac: "a4-5e-60-c8-9f-36",
-      Name: "Terence Leung"
+      mac: "a4-5e-60-c8-9f-36",
+      name: "Terence Leung",
+      room: "1",
+      date: this.inOut(new Date())
     }
   ];
 
@@ -33,23 +39,36 @@ export class MainComponent {
   
   pollApis($q) {
     console.log("Polling!");
+    var now = new Date();
     $q.when([
       {
-        Mac: "a4-5e-60-c8-9f-35",
-        Name: "Mark Zacharias"
+        mac: "a4-5e-60-c8-9f-34",
+        name: "Ian Phillipchuk",
+        room: "1",
+        date: this.inOut(now)
       }, 
       {
-        Mac: "a4-5e-60-c8-9f-34",
-        Name: "Ian Phillipchuk"
+        mac: "a4-5e-60-c8-9f-35",
+        name: "Mark Zacharias",
+        room: "1",
+        date: this.inOut(now.setMinutes(now.getMinutes() - 5))
       },
       {
-        Mac: "a4-5e-60-c8-9f-36",
-        Name: "Terence Leung"
+        mac: "a4-5e-60-c8-9f-36",
+        name: "Terence Leung",
+        room: "1",
+        date: this.inOut(now.setMinutes(now.getMinutes() - 20))
       }
     ]).then((users) => 
     {
       this.macList = users;
     });
+  }
+
+  inOut(date) {
+    var difference = ((new Date()).valueOf() - date);
+
+    return (difference < 600000 ? "IN" : "OUT")
   }
 }
 
