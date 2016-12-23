@@ -50,7 +50,7 @@ export class MainComponent {
           var newEntry = {
             name: macEntry.name ? macEntry.name : "Guest",
             mac: macEntry.mac,
-            room: macEntry.room,
+            room: macEntry.room ? macEntry.room : "N/A",
             status: this.inOut(new Date(macEntry.time))
           };
 
