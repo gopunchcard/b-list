@@ -9,7 +9,7 @@ export class MainComponent {
   macList: [any];
 
   /*@ngInject*/
-  constructor($q : ng.IQService) {
+  constructor($http : ng.IHttpService, $q : ng.IQService) {
     this.macList = [
     {
       mac: "a4-5e-60-c8-9f-34",
@@ -31,38 +31,20 @@ export class MainComponent {
     }
   ];
 
-    setInterval(() =>
+    setTimeout(() =>
     {
-      this.pollApis($q);
-    }, 10000);
+      this.pollApis($q, $http);
+    }, 500);
   }
   
-  pollApis($q) {
+  pollApis($q, $http) {
     console.log("Polling!");
     var now = new Date();
-    $q.when([
-      {
-        mac: "a4-5e-60-c8-9f-34",
-        name: "Ian Phillipchuk",
-        room: "1",
-        date: this.inOut(now)
-      }, 
-      {
-        mac: "a4-5e-60-c8-9f-35",
-        name: "Mark Zacharias",
-        room: "1",
-        date: this.inOut(now.setMinutes(now.getMinutes() - 5))
-      },
-      {
-        mac: "a4-5e-60-c8-9f-36",
-        name: "Terence Leung",
-        room: "1",
-        date: this.inOut(now.setMinutes(now.getMinutes() - 20))
-      }
-    ]).then((users) => 
-    {
-      this.macList = users;
-    });
+
+    $http.get("http://10.0.1.184:3010/users")
+      .then((users) => {
+        this.macList = users;
+      });
   }
 
   inOut(date) {
