@@ -27,7 +27,7 @@ import time
 import requests
 import json
 
-url = 'http://10.0.1.184:3010/bluetooth'
+url = 'http://localhost:3010/bluetooth'
 
 while True:
     print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
