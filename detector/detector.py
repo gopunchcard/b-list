@@ -35,7 +35,7 @@ while True:
     print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
 
     macAddresses = requests.get(urlRoot+'/bluetooth/macAddresses')
-    for addr in macAddresses
+    for addr in macAddresses:
         print "Address: "+addr
 
     result = bluetooth.lookup_name('70:3E:AC:A1:0B:AA', timeout=5)
