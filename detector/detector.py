@@ -35,7 +35,7 @@ while True:
     print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
 
     macAddresses = requests.get(urlRoot+'/bluetooth/macAddresses')
-    print "json: "+ macAddresses.json()
+  
     for addr in macAddresses.json():
         print "Address: "+addr
 
