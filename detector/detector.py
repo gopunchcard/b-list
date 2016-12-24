@@ -32,9 +32,9 @@ while True:
 
     result = bluetooth.lookup_name('1C:66:AA:CF:DD:35', timeout=5)
     if (result != None):
-       payload = { 'mac': str('1C:66:AA:CF:DD:35') }
-		headers = {'content-type': 'application/json'}
-		requests.post(url, data=json.dumps(payload), headers=headers)
+        payload = { 'mac': str('1C:66:AA:CF:DD:35') }
+	    headers = {'content-type': 'application/json'}
+	    requests.post(url, data=json.dumps(payload), headers=headers)
     else:
         print "Estyn: out"
 		
