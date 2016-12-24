@@ -39,13 +39,13 @@ while True:
     for addr in macAddresses.json():
         print "Address: "+addr
 
-    result = bluetooth.lookup_name('70:3E:AC:A1:0B:AA', timeout=5)
-    if (result != None):
-        print "Estyn: in"
-        payload = { 'mac': str('70:3E:AC:A1:0B:AA') }
-        headers = {'content-type': 'application/json'}
-        requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
-    else:
-        print "Estyn: out"
+        result = bluetooth.lookup_name(addr, timeout=5)
+        if (result != None):
+            print addr+": in"
+            payload = { 'mac': str(addr) }
+            headers = {'content-type': 'application/json'}
+            requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
+        else:
+            print add+": out"
 		
     time.sleep(60)
