@@ -30,9 +30,9 @@ url = 'http://10.0.1.184:3010/bluetooth'
 while True:
     print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
 
-    result = bluetooth.lookup_name('1C:66:AA:CF:DD:35', timeout=5)
+    result = bluetooth.lookup_name('70:3E:AC:A1:0B:AA', timeout=5)
     if (result != None):
-        payload = { 'mac': str('1C:66:AA:CF:DD:35') }
+        payload = { 'mac': str('70:3E:AC:A1:0B:AA') }
         headers = {'content-type': 'application/json'}
         requests.post(url, data=json.dumps(payload), headers=headers)
     else:
