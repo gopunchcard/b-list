@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var multer = require('multer');
 var storage = require('node-persist');
-//var Q = require('Q');
+var _ = require('lodash');
 
 var upload = multer(); // for parsing multipart/form-data
 var app = express();
@@ -25,7 +25,9 @@ function setupRouting(){
     app.get('/', helloWorld);
     app.get('/users', getUsers);
     app.post('/user', upload.array(), saveUser);
+
     app.post('/bluetooth', upload.array(), saveBluetoothDection);
+    app.get('/bluetooth/macAddresses', getAllMacs);
 
     return;
 }
@@ -42,7 +44,12 @@ function helloWorld(req, res){
 }
 
 function getUsers(req, res){
+    console.log('fetch');
     res.json(storage.values());
+}
+function getAllMacs(req, res){
+    var macsOnly = _.map(storage.values(), 'mac');
+    res.json(macsOnly);
 }
 
 function saveBluetoothDection (req, res, next) {
@@ -83,7 +90,7 @@ function saveUser(req, res, next){
     })
     .catch(function(err){console.error('save fail for', req.body.mac, err);});
 }
-function createUpdateRecordDetection(record, incoming){
+function createUpdateRecord(record, incoming){
     if(!record){
         record = {};
     }
