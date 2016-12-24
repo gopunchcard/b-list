@@ -15,23 +15,23 @@ export class MainComponent {
       mac: "a4-5e-60-c8-9f-34",
       name: "Ian Phillipchuk",
       room: "1",
-      date: this.inOut(new Date())
+      status: this.inOut(new Date())
     }, 
     {
       mac: "a4-5e-60-c8-9f-35",
       name: "Mark Zacharias",
       room: "1",
-      date: this.inOut(new Date())
+      status: this.inOut(new Date())
     },
     {
       mac: "a4-5e-60-c8-9f-36",
       name: "Terence Leung",
       room: "1",
-      date: this.inOut(new Date())
+      status: this.inOut(new Date())
     }
   ];
 
-    setTimeout(() =>
+    setInterval(() =>
     {
       this.pollApis($q, $http);
     }, 500);
@@ -43,14 +43,27 @@ export class MainComponent {
 
     $http.get("http://10.0.1.184:3010/users")
       .then((users) => {
-        this.macList = users;
+        var newList : any[] = [];
+
+        for (let macEntry of users.data)
+        {
+          var newEntry = {
+            name: macEntry.name ? macEntry.name : "Guest",
+            mac: macEntry.mac,
+            room: macEntry.room ? macEntry.room : "N/A",
+            status: this.inOut(new Date(macEntry.time))
+          };
+
+          newList.push(newEntry);
+        }
+
+        this.macList = newList;
       });
   }
 
   inOut(date) {
     var difference = ((new Date()).valueOf() - date);
-
-    return (difference < 600000 ? "IN" : "OUT")
+    return (difference < 600000 ? "IN" : "OUT");
   }
 }
 
