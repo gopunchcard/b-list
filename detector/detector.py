@@ -46,6 +46,6 @@ while True:
             headers = {'content-type': 'application/json'}
             requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
         else:
-            print add+": out"
+            print addr+": out"
 		
     time.sleep(60)
