@@ -33,7 +33,7 @@ function setupRouting(){
 }
 function startListener(){
     app.listen(3010, function(){
-        console.log('app listening on pot 3010!');
+        console.log('app listening on port 3010!');
     });
 
     return;
