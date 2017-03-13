@@ -8,10 +8,19 @@ class Startup {
     }
 
     constructor(){
-        this.fetchMacList()
-        .then(()=> this.parseMacList())
-        .then(()=> this.renderUI(),
-        (reason)=> console.log('api failed', reason));
+
+        //on first launch get data right away, then every 60 seconds
+         this.fetchMacList()
+            .then(()=> this.parseMacList())
+            .then(()=> this.renderUI(),
+            (reason)=> console.log('api failed', reason));
+
+        setInterval(()=> {
+            this.fetchMacList()
+            .then(()=> this.parseMacList())
+            .then(()=> this.renderUI(),
+            (reason)=> console.log('api failed', reason));
+        }, 60000);
     }
 
     private fetchMacList(){
@@ -77,6 +86,10 @@ class Startup {
         });
 
         var wrapper = document.getElementById('userListing');
+
+        while(wrapper.firstChild){
+            wrapper.removeChild(wrapper.firstChild);
+        }
         wrapper.appendChild(list);
     }
 

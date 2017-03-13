@@ -1,9 +1,15 @@
 var Startup = (function () {
     function Startup() {
         var _this = this;
+        //on first launch get data right away, then every 60 seconds
         this.fetchMacList()
             .then(function () { return _this.parseMacList(); })
             .then(function () { return _this.renderUI(); }, function (reason) { return console.log('api failed', reason); });
+        setInterval(function () {
+            _this.fetchMacList()
+                .then(function () { return _this.parseMacList(); })
+                .then(function () { return _this.renderUI(); }, function (reason) { return console.log('api failed', reason); });
+        }, 60000);
     }
     Startup.main = function () {
         console.log('Hello World');
@@ -67,6 +73,9 @@ var Startup = (function () {
             list.appendChild(listItem);
         });
         var wrapper = document.getElementById('userListing');
+        while (wrapper.firstChild) {
+            wrapper.removeChild(wrapper.firstChild);
+        }
         wrapper.appendChild(list);
     };
     Startup.prototype.getStatus = function (date) {
