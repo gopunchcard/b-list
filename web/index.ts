@@ -39,6 +39,7 @@ class Startup {
         this.macList.forEach(userItem => {
             userItem.name = userItem.name ? userItem.name : 'Guest';
             userItem.room = userItem.room ? userItem.room : 'N/A';
+            userItem.time = new Date(userItem.time);
             userItem.status = this.getStatus(userItem.time);
         });
     }

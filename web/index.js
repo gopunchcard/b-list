@@ -33,6 +33,7 @@ var Startup = (function () {
         this.macList.forEach(function (userItem) {
             userItem.name = userItem.name ? userItem.name : 'Guest';
             userItem.room = userItem.room ? userItem.room : 'N/A';
+            userItem.time = new Date(userItem.time);
             userItem.status = _this.getStatus(userItem.time);
         });
     };
