@@ -25,6 +25,7 @@ function setupRouting(){
     app.get('/', helloWorld);
     app.get('/users', getUsers);
     app.post('/user', upload.array(), saveUser);
+    app.delete('/user', upload.array(), deleteUser);
 
     app.post('/bluetooth', upload.array(), saveBluetoothDection);
     app.get('/bluetooth/macAddresses', getAllMacs);
@@ -97,6 +98,32 @@ function createUpdateRecord(record, incoming){
     _.extend(record, incoming);
     
     return record;
+}
+
+function deleteUser(req, res, next){
+    getRecord(req.body.mac)
+    .then(function(record){ 
+        if(record){
+            return deleteRecord(record.mac);
+        }
+        else{
+            throw new Error('record does not exist');
+        }
+    })
+    .then(function(){
+        console.info('delete success');
+        res.send('delete success');
+    })
+    .catch(function(err){
+        console.error('delete failed for', req.body.mac, err);
+        res.status(500).send({error: 'delete failed for ' + req.body.mac});
+    });
+    //storage.removeItem(req.body.mac);
+
+    
+}
+function deleteRecord(mac){
+    return storage.removeItem(mac);
 }
 
 function logError(err){
