@@ -24,25 +24,29 @@ class Startup {
     }
 
     private fetchMacList(){
-        //this.macList = this.mockMacList();
-
-        var deferred = Q.defer();
-
-        let url  = Config.apiUrl + 'users';
-        let request = new XMLHttpRequest();
-        request.onload =  () => {
-            if(request.status == 200){
-                this.macList = JSON.parse(request.response);
-                deferred.resolve(this.macList);                
-            }
-            else{
-                deferred.reject(request.status);
-            }
+        
+        if(Config.useMockData){
+            this.macList = this.mockMacList();
+            return Q.when(this.macList);
         }
-        request.open('get', url, true);
-        request.send(null);
+        else{
+            var deferred = Q.defer();
+            let url  = Config.apiUrl + 'users';
+            let request = new XMLHttpRequest();
+            request.onload =  () => {
+                if(request.status == 200){
+                    this.macList = JSON.parse(request.response);
+                    deferred.resolve(this.macList);                
+                }
+                else{
+                    deferred.reject(request.status);
+                }
+            }
+            request.open('get', url, true);
+            request.send(null);
 
-        return deferred.promise;
+            return deferred.promise;
+        }
     }
     private parseMacList(){
         this.macList.forEach(userItem => {
@@ -113,6 +117,7 @@ class UserItem{
 
 class Config{
     public static apiUrl: string = 'http://192.168.1.72:3010/';
+    public static useMockData: boolean = true;
 }
 
 var s = new Startup();

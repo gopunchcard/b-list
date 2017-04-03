@@ -16,23 +16,28 @@ var Startup = (function () {
         return 0;
     };
     Startup.prototype.fetchMacList = function () {
-        //this.macList = this.mockMacList();
         var _this = this;
-        var deferred = Q.defer();
-        var url = Config.apiUrl + 'users';
-        var request = new XMLHttpRequest();
-        request.onload = function () {
-            if (request.status == 200) {
-                _this.macList = JSON.parse(request.response);
-                deferred.resolve(_this.macList);
-            }
-            else {
-                deferred.reject(request.status);
-            }
-        };
-        request.open('get', url, true);
-        request.send(null);
-        return deferred.promise;
+        if (Config.useMockData) {
+            this.macList = this.mockMacList();
+            return Q.when(this.macList);
+        }
+        else {
+            var deferred = Q.defer();
+            var url = Config.apiUrl + 'users';
+            var request_1 = new XMLHttpRequest();
+            request_1.onload = function () {
+                if (request_1.status == 200) {
+                    _this.macList = JSON.parse(request_1.response);
+                    deferred.resolve(_this.macList);
+                }
+                else {
+                    deferred.reject(request_1.status);
+                }
+            };
+            request_1.open('get', url, true);
+            request_1.send(null);
+            return deferred.promise;
+        }
     };
     Startup.prototype.parseMacList = function () {
         var _this = this;
@@ -95,8 +100,9 @@ var UserItem = (function () {
 var Config = (function () {
     function Config() {
     }
-    Config.apiUrl = 'http://192.168.1.72:3010/';
     return Config;
 }());
+Config.apiUrl = 'http://192.168.1.72:3010/';
+Config.useMockData = true;
 var s = new Startup();
 //# sourceMappingURL=index.js.map
