@@ -54,24 +54,28 @@ class Startup {
     }
 
     private mockMacList(): [UserItem] {
+
         return [
             {
                 mac: "a4-5e-60-c8-9f-34",
                 name: "Ian Phillipchuk",
                 room: "1",
-                status: this.inOut(new Date(new Date() as any - 600000))
+                status: this.getStatus(new Date(new Date() as any - 600000)),
+                time: new Date(new Date() as any - 600000)
             },
             {
                 mac: "a4-5e-60-c8-9f-35",
                 name: "Mark Zacharias",
                 room: "1",
-                status: this.inOut(new Date())
+                status: this.getStatus(new Date()),
+                time: new Date()
             },
             {
                 mac: "a4-5e-60-c8-9f-36",
                 name: "Terence Leung",
                 room: "1",
-                status: this.inOut(new Date())
+                status: this.getStatus(new Date()),
+                time: new Date()
             }
         ];
     }
