@@ -103,7 +103,7 @@ class Startup {
 
     private getStatus(date: Date) {
         var difference = ((new Date()).valueOf() - (date as any));
-        return (difference < 600000 ? "IN" : "OUT");
+        return (difference < 600000 ? "IN" : "OUT"); //consider user 'out' after 10 minutes
     }
 }
 
@@ -116,8 +116,8 @@ class UserItem{
 }
 
 class Config{
-    public static apiUrl: string = 'http://192.168.1.72:3010/';
-    public static useMockData: boolean = true;
+    public static apiUrl: string = 'http://10.0.1.9:3010/';
+    public static useMockData: boolean = false;
 }
 
 var s = new Startup();

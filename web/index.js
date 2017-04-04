@@ -88,7 +88,7 @@ var Startup = (function () {
     };
     Startup.prototype.getStatus = function (date) {
         var difference = ((new Date()).valueOf() - date);
-        return (difference < 600000 ? "IN" : "OUT");
+        return (difference < 600000 ? "IN" : "OUT"); //consider user 'out' after 10 minutes
     };
     return Startup;
 }());
@@ -102,7 +102,7 @@ var Config = (function () {
     }
     return Config;
 }());
-Config.apiUrl = 'http://192.168.1.72:3010/';
-Config.useMockData = true;
+Config.apiUrl = 'http://10.0.1.9:3010/';
+Config.useMockData = false;
 var s = new Startup();
 //# sourceMappingURL=index.js.map
