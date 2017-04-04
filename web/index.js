@@ -100,9 +100,9 @@ var UserItem = (function () {
 var Config = (function () {
     function Config() {
     }
+    Config.apiUrl = 'http://192.168.1.72:3010/';
+    Config.useMockData = true;
     return Config;
 }());
-Config.apiUrl = 'http://192.168.1.72:3010/';
-Config.useMockData = true;
 var s = new Startup();
 //# sourceMappingURL=index.js.map
