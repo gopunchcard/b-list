@@ -74,17 +74,43 @@ var Startup = (function () {
         ];
     };
     Startup.prototype.renderUI = function () {
-        var list = document.createElement('ul');
-        this.macList.forEach(function (userItem) {
-            var listItem = document.createElement('li');
-            listItem.innerHTML = userItem.name + ': ' + userItem.status;
-            list.appendChild(listItem);
-        });
+        var _this = this;
         var wrapper = document.getElementById('userListing');
         while (wrapper.firstChild) {
             wrapper.removeChild(wrapper.firstChild);
         }
-        wrapper.appendChild(list);
+        wrapper.appendChild(this.renderTableHeader());
+        this.macList.forEach(function (user) {
+            wrapper.appendChild(_this.renderUserRow(user));
+        });
+    };
+    Startup.prototype.renderTableHeader = function () {
+        var header = document.createElement('div');
+        header.className = 'table-header';
+        header.innerHTML = '<div class="name"><p>NAME</p></div> <div class="company"><p>COMPANY</p></div> <div class="in"><p>IN</p></div> <div class="out"><p>OUT</p></div>';
+        return header;
+        // <div class="table-header">
+        //         <div class="name"><p>NAME</p></div>
+        //         <div class="company"><p>COMPANY</p></div>
+        //         <div class="in"><p>IN</p></div>
+        //         <div class="out"><p>OUT</p></div>
+        //     </div>
+    };
+    Startup.prototype.renderUserRow = function (user) {
+        var row = document.createElement('div');
+        row.className = 'table-row';
+        var html = '<div class="name"><p>' + user.name + '</p></div>';
+        html += '<div class="company"><p></p></div>';
+        if (user.status === 'IN') {
+            html += '<div class="in"><div class="active"></div></div>';
+            html += '<div class="out"></div>';
+        }
+        else {
+            html += '<div class="in"></div>';
+            html += '<div class="out"><div class="active"></div></div>';
+        }
+        row.innerHTML = html;
+        return row;
     };
     Startup.prototype.getStatus = function (date) {
         var difference = ((new Date()).valueOf() - date);
