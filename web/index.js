@@ -44,6 +44,7 @@ var Startup = (function () {
         this.macList.forEach(function (userItem) {
             userItem.name = userItem.name ? userItem.name : 'Guest';
             userItem.room = userItem.room ? userItem.room : 'N/A';
+            userItem.company = userItem.company ? userItem.company : '';
             userItem.time = new Date(userItem.time);
             userItem.status = _this.getStatus(userItem.time);
         });
@@ -54,6 +55,7 @@ var Startup = (function () {
                 mac: "a4-5e-60-c8-9f-34",
                 name: "Ian Phillipchuk",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date(new Date() - 600000)),
                 time: new Date(new Date() - 600000)
             },
@@ -61,6 +63,7 @@ var Startup = (function () {
                 mac: "a4-5e-60-c8-9f-35",
                 name: "Mark Zacharias",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date()),
                 time: new Date()
             },
@@ -68,6 +71,7 @@ var Startup = (function () {
                 mac: "a4-5e-60-c8-9f-36",
                 name: "Terence Leung",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date()),
                 time: new Date()
             }
@@ -100,7 +104,7 @@ var Startup = (function () {
         var row = document.createElement('div');
         row.className = 'table-row';
         var html = '<div class="name"><p>' + user.name + '</p></div>';
-        html += '<div class="company"><p></p></div>';
+        html += '<div class="company"><p>' + user.company + '</p></div>';
         if (user.status === 'IN') {
             html += '<div class="in"><div class="active"></div></div>';
             html += '<div class="out"></div>';

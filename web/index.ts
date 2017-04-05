@@ -52,6 +52,7 @@ class Startup {
         this.macList.forEach(userItem => {
             userItem.name = userItem.name ? userItem.name : 'Guest';
             userItem.room = userItem.room ? userItem.room : 'N/A';
+            userItem.company = userItem.company ? userItem.company : '';
             userItem.time = new Date(userItem.time);
             userItem.status = this.getStatus(userItem.time);
         });
@@ -64,6 +65,7 @@ class Startup {
                 mac: "a4-5e-60-c8-9f-34",
                 name: "Ian Phillipchuk",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date(new Date() as any - 600000)),
                 time: new Date(new Date() as any - 600000)
             },
@@ -71,6 +73,7 @@ class Startup {
                 mac: "a4-5e-60-c8-9f-35",
                 name: "Mark Zacharias",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date()),
                 time: new Date()
             },
@@ -78,6 +81,7 @@ class Startup {
                 mac: "a4-5e-60-c8-9f-36",
                 name: "Terence Leung",
                 room: "1",
+                company: 'Punchcard Systems',
                 status: this.getStatus(new Date()),
                 time: new Date()
             }
@@ -116,7 +120,7 @@ class Startup {
         row.className = 'table-row';
         
         let html = '<div class="name"><p>' + user.name + '</p></div>';
-        html += '<div class="company"><p></p></div>';
+        html += '<div class="company"><p>' + user.company + '</p></div>';
         if(user.status === 'IN'){
             html += '<div class="in"><div class="active"></div></div>';
             html += '<div class="out"></div>';
@@ -141,6 +145,7 @@ class UserItem{
     mac: string;
     name: string;
     room: string;
+    company: string;
     status: string;
     time: Date;
 }
