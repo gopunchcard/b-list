@@ -27,9 +27,7 @@ import time
 import requests
 import json
 
-urlRoot = 'http://localhost:3010'
-
-
+urlRoot = 'http://10.0.1.9:3010'
 
 while True:
     print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
@@ -47,5 +45,7 @@ while True:
             requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
         else:
             print addr+": out"
-		
+    
+    print "Done Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
+    		
     time.sleep(60)
