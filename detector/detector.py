@@ -36,7 +36,7 @@ def CheckForMacs():
         macAddresses = requests.get(urlRoot+'/bluetooth/macAddresses')
     
         for addr in macAddresses.json():
-            result = bluetooth.lookup_name(addr, timeout=5)
+            result = bluetooth.lookup_name(addr, timeout=2)
             if (result != None):
                 print addr+": in"
                 payload = { 'mac': str(addr) }
@@ -53,4 +53,4 @@ def CheckForMacs():
 
 while True:
     CheckForMacs()
-    time.sleep(45)
+    time.sleep(15)
