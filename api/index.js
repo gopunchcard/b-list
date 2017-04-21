@@ -45,7 +45,7 @@ function helloWorld(req, res){
 }
 
 function getUsers(req, res){
-    console.log('fetch');
+    logRequest(req, 'getUsers');
     res.json(storage.values());
 }
 function getAllMacs(req, res){
@@ -59,10 +59,10 @@ function saveBluetoothDection (req, res, next) {
     .then(function(record){return createUpdateRecordDetection(record, req.body.mac);})
     .then(saveRecord)
     .then(function(){
-        console.info('save success');
+        logRequest(req, 'saveBluetoothDetection');
         res.send('save success');
     })
-    .catch(function(err){console.error('save fail for', req.body.mac, err);});
+    .catch(function(err){logError(req, 'save fail for ' + req.body.mac, err);});
 
 }
 function getRecord(mac){
@@ -86,10 +86,10 @@ function saveUser(req, res, next){
     .then(function(record){return createUpdateRecord(record, req.body);})
     .then(saveRecord)
     .then(function(){
-        console.info('save success');
+        logRequest(req, 'saveUser');
         res.send('save success');
     })
-    .catch(function(err){console.error('save fail for', req.body.mac, err);});
+    .catch(function(err){logError(req, 'save fail for ' + req.body.mac, err);});
 }
 function createUpdateRecord(record, incoming){
     if(!record){
@@ -111,23 +111,25 @@ function deleteUser(req, res, next){
         }
     })
     .then(function(){
-        console.info('delete success');
+        logRequest(req, 'deleteUser');
         res.send('delete success');
     })
     .catch(function(err){
-        console.error('delete failed for', req.body.mac, err);
+        logError(req, 'delete failed for ' + req.body.mac, err);
         res.status(500).send({error: 'delete failed for ' + req.body.mac});
-    });
-    //storage.removeItem(req.body.mac);
-
-    
+    });    
 }
 function deleteRecord(mac){
     return storage.removeItem(mac);
 }
 
-function logError(err){
-    console.error(err);
+function logRequest(req, functionName){
+    console.info(new Date(), req.ip, functionName);
+}
+
+function logError(req, msg, err){
+    req = req || {ip:'unknown'};
+    console.error(new Date(), req.ip, msg, err);
 }
 
 
