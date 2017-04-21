@@ -1,7 +1,7 @@
 var Startup = (function () {
     function Startup() {
         var _this = this;
-        //on first launch get data right away, then every 60 seconds
+        //on first launch get data right away, then every x seconds
         this.fetchMacList()
             .then(function () { return _this.parseMacList(); })
             .then(function () { return _this.renderUI(); }, function (reason) { return console.log('api failed', reason); });
@@ -9,7 +9,7 @@ var Startup = (function () {
             _this.fetchMacList()
                 .then(function () { return _this.parseMacList(); })
                 .then(function () { return _this.renderUI(); }, function (reason) { return console.log('api failed', reason); });
-        }, 60000);
+        }, Config.dataRefreshRate);
     }
     Startup.main = function () {
         console.log('Hello World');
@@ -118,7 +118,7 @@ var Startup = (function () {
     };
     Startup.prototype.getStatus = function (date) {
         var difference = ((new Date()).valueOf() - date);
-        return (difference < 600000 ? "IN" : "OUT"); //consider user 'out' after 10 minutes
+        return (difference < Config.inOutDiff ? "IN" : "OUT"); //consider user 'out' after 1 minutes
     };
     return Startup;
 }());
@@ -134,5 +134,7 @@ var Config = (function () {
 }());
 Config.apiUrl = 'http://10.0.1.9:3010/';
 Config.useMockData = false;
+Config.inOutDiff = 60000; //consider user 'out' after 1 minutes
+Config.dataRefreshRate = 30000; //check every minute
 var s = new Startup();
 //# sourceMappingURL=index.js.map

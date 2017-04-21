@@ -9,7 +9,7 @@ class Startup {
 
     constructor(){
 
-        //on first launch get data right away, then every 60 seconds
+        //on first launch get data right away, then every x seconds
          this.fetchMacList()
             .then(()=> this.parseMacList())
             .then(()=> this.renderUI(),
@@ -20,7 +20,7 @@ class Startup {
             .then(()=> this.parseMacList())
             .then(()=> this.renderUI(),
             (reason)=> console.log('api failed', reason));
-        }, 60000);
+        }, Config.dataRefreshRate);
     }
 
     private fetchMacList(){
@@ -137,7 +137,7 @@ class Startup {
 
     private getStatus(date: Date) {
         var difference = ((new Date()).valueOf() - (date as any));
-        return (difference < 600000 ? "IN" : "OUT"); //consider user 'out' after 10 minutes
+        return (difference < Config.inOutDiff ? "IN" : "OUT"); //consider user 'out' after 1 minutes
     }
 }
 
@@ -153,6 +153,8 @@ class UserItem{
 class Config{
     public static apiUrl: string = 'http://10.0.1.9:3010/';
     public static useMockData: boolean = false;
+    public static inOutDiff: number = 60000; //consider user 'out' after 1 minutes
+    public static dataRefreshRate: number = 30000;  //check every minute
 }
 
 var s = new Startup();
