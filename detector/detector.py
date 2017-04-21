@@ -29,23 +29,28 @@ import json
 
 urlRoot = 'http://10.0.1.9:3010'
 
-while True:
-    print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
+def CheckForMacs():
+    try:
+        print "Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
 
-    macAddresses = requests.get(urlRoot+'/bluetooth/macAddresses')
-  
-    for addr in macAddresses.json():
-        print "Address: "+addr
-
-        result = bluetooth.lookup_name(addr, timeout=5)
-        if (result != None):
-            print addr+": in"
-            payload = { 'mac': str(addr) }
-            headers = {'content-type': 'application/json'}
-            requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
-        else:
-            print addr+": out"
+        macAddresses = requests.get(urlRoot+'/bluetooth/macAddresses')
     
-    print "Done Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
-    		
-    time.sleep(60)
+        for addr in macAddresses.json():
+            result = bluetooth.lookup_name(addr, timeout=5)
+            if (result != None):
+                print addr+": in"
+                payload = { 'mac': str(addr) }
+                headers = {'content-type': 'application/json'}
+                requests.post(urlRoot+'/bluetooth', data=json.dumps(payload), headers=headers)
+            else:
+                print addr+": out"
+                
+    except Exception as err:
+        print "Error during check: ", err
+    finally:
+        print "Done Checking " + time.strftime("%a, %d %b %Y %H:%M:%S", time.gmtime())
+        return
+
+while True:
+    CheckForMacs()
+    time.sleep(45)
