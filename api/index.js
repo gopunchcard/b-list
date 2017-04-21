@@ -17,9 +17,16 @@ function init(){
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 
     storage.init()
+    .then(setupLogging)
     .then(setupRouting)
     .then(startListener)
     .catch(logError);
+}
+function setupLogging(){
+    app.all('*', function(req, res, next){
+        logRequest(req);
+        next();
+    })
 }
 function setupRouting(){
     app.get('/', helloWorld);
@@ -45,7 +52,6 @@ function helloWorld(req, res){
 }
 
 function getUsers(req, res){
-    logRequest(req, 'getUsers');
     res.json(storage.values());
 }
 function getAllMacs(req, res){
@@ -59,7 +65,6 @@ function saveBluetoothDection (req, res, next) {
     .then(function(record){return createUpdateRecordDetection(record, req.body.mac);})
     .then(saveRecord)
     .then(function(){
-        logRequest(req, 'saveBluetoothDetection');
         res.send('save success');
     })
     .catch(function(err){logError(req, 'save fail for ' + req.body.mac, err);});
@@ -86,7 +91,6 @@ function saveUser(req, res, next){
     .then(function(record){return createUpdateRecord(record, req.body);})
     .then(saveRecord)
     .then(function(){
-        logRequest(req, 'saveUser');
         res.send('save success');
     })
     .catch(function(err){logError(req, 'save fail for ' + req.body.mac, err);});
@@ -111,7 +115,6 @@ function deleteUser(req, res, next){
         }
     })
     .then(function(){
-        logRequest(req, 'deleteUser');
         res.send('delete success');
     })
     .catch(function(err){
@@ -123,8 +126,8 @@ function deleteRecord(mac){
     return storage.removeItem(mac);
 }
 
-function logRequest(req, functionName){
-    console.info(new Date(), req.ip, functionName);
+function logRequest(req){
+    console.info(new Date(), req.ip, req.method, req.originalUrl);
 }
 
 function logError(req, msg, err){
