@@ -6,6 +6,7 @@ var _ = require('lodash');
 
 var upload = multer(); // for parsing multipart/form-data
 var app = express();
+var api = express.Router();
 
 function init(){
     app.use(function(req, res, next) {
@@ -15,6 +16,8 @@ function init(){
     });
     app.use(bodyParser.json()); // for parsing application/json
     app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+    
+    app.use('/site', express.static('../web'));
 
     storage.init()
     .then(setupLogging)
@@ -29,13 +32,15 @@ function setupLogging(){
     })
 }
 function setupRouting(){
-    app.get('/', helloWorld);
-    app.get('/users', getUsers);
-    app.post('/user', upload.array(), saveUser);
-    app.delete('/user', upload.array(), deleteUser);
+    api.get('/', helloWorld);
+    api.get('/users', getUsers);
+    api.post('/user', upload.array(), saveUser);
+    api.delete('/user', upload.array(), deleteUser);
 
-    app.post('/bluetooth', upload.array(), saveBluetoothDection);
-    app.get('/bluetooth/macAddresses', getAllMacs);
+    api.post('/bluetooth', upload.array(), saveBluetoothDection);
+    api.get('/bluetooth/macAddresses', getAllMacs);
+
+    app.use('/api', api);
 
     return;
 }
