@@ -27,7 +27,7 @@ import time
 import requests
 import json
 
-urlRoot = 'http://10.0.1.9:3010'
+urlRoot = 'http://10.0.1.9:3010/api'
 
 def CheckForMacs():
     try:

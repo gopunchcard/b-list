@@ -151,7 +151,7 @@ class UserItem{
 }
 
 class Config{
-    public static apiUrl: string = 'http://10.0.1.9:3010/';
+    public static apiUrl: string = 'http://10.0.1.9:3010/api/';
     public static useMockData: boolean = false;
     public static inOutDiff: number = 60000; //consider user 'out' after 1 minutes
     public static dataRefreshRate: number = 30000;  //check every minute

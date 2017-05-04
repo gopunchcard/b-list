@@ -132,7 +132,7 @@ var Config = (function () {
     }
     return Config;
 }());
-Config.apiUrl = 'http://10.0.1.9:3010/';
+Config.apiUrl = 'http://10.0.1.9:3010/api/';
 Config.useMockData = false;
 Config.inOutDiff = 60000; //consider user 'out' after 1 minutes
 Config.dataRefreshRate = 30000; //check every minute
