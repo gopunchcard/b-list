@@ -34,12 +34,15 @@ html {
     font-weight: 200
 }
 body {
+    max-width: 600px;
     height: 100vh;
     width: 100vw;
     background: radial-gradient(ellipse at 50% 30%, #ff3900 0%, #be0051 100%);
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 .main {
     background: radial-gradient(ellipse at 42% 42%, #3A3A4C 0%, #2D2D38 100%);
@@ -136,4 +139,7 @@ h1 {
 #register-form button {
     padding: 0px 20px;
     margin: 5px 0;
+}
+.toast-custom {
+    margin-top: 30px;
 }

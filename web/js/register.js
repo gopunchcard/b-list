@@ -74,7 +74,7 @@ function saveUser() {
 
 function showToast() {
   toastr.options = {
-    "positionClass": "toast-top-center"
+    "positionClass": "toast-custom toast-top-center"
   }
 
   toastr.success('Save success!');
