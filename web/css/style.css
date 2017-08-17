@@ -50,7 +50,7 @@ body {
     padding: 4em;
     display: flex;
     flex-direction: column;
-    justify-content: space-between
+    justify-content: space-between;
 }
 .corner-logo {
     position: absolute;
@@ -73,7 +73,8 @@ h1 {
     bottom: 6em;
     right: 4em;
     background: url("../images/unit-b-bkg.png") center center no-repeat;
-    background-size: cover
+    background-size: cover;
+    z-index: -1;
 }
 .in-out-table {
     margin-top: 1em;
@@ -176,7 +177,6 @@ h1 {
 #connect {
     color: white;
     background-color: #4CAF50;
-    width: 30%;
     font-weight: bold;
 }
 .connect-button--raised {
@@ -213,17 +213,21 @@ h1 {
 #register-form {
     width: 30%;
     color: white;
+    float: left;
 }
 #register-form div {
     display: block;
     float: left;
     margin-bottom: 10px;
+    width: 100%;
 }
 #register-form div label {
     display: block;
 }
-#register-form input {
-    padding: 5px 5px;
+#register-form input,
+#register-form select {
+    width: 100%;
+    padding: 10px 10px;
     margin: 5px 0;
     display: inline-block;
     border: 1px solid #ccc;

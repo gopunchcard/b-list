@@ -47,7 +47,8 @@ function onButtonClick() {
 
 function saveUser() {
   var mac = document.getElementById('mac').value;
-  var room = document.getElementById('room').value;
+  var roomEl = document.getElementById('room');
+  var room = roomEl.options[roomEl.selectedIndex].value;
   var name = document.getElementById('name').value;
   var company = document.getElementById('company').value;
 
@@ -57,7 +58,7 @@ function saveUser() {
     name,
     company
   };
-  
+
   var fetchOptions = {
     method: 'POST',
     headers: {
@@ -68,7 +69,13 @@ function saveUser() {
   };
 
   fetch(urlRoot + '/user', fetchOptions)
-    .then(resp => {
-      console.log(resp);
-    })
+    .then(showToast());
+}
+
+function showToast() {
+  toastr.options = {
+    "positionClass": "toast-top-center"
+  }
+
+  toastr.success('Save success!');
 }

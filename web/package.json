@@ -13,7 +13,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "q": "^1.4.1"
+    "jquery": "^3.2.1",
+    "q": "^1.4.1",
+    "toastr": "^2.1.2"
   },
   "devDependencies": {
     "@types/q": "0.0.32"
