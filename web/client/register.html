@@ -17,8 +17,9 @@
             <h1>In/Out Board</h1>
             <form id="register-form">
                 <div>
-                    <label for="mac">mac</label>
+                    <label for="mac">MAC address <span style="color: red">*</span></label>
                     <input id="mac" type="text" value="" name="mac" />
+                    <span id="mac-error" class="error-msg"></span>
                 </div>
                 <div>
                     <label for="room">Room</label>
@@ -36,8 +37,9 @@
                     </select>
                 </div>
                 <div>
-                    <label for="name">Name</label>
+                    <label for="name">Name <span style="color: red;">*</span></label>
                     <input id="name" type="text" value="" name="name" />
+                    <span id="name-error" class="error-msg"></span>
                 </div>
                 <div>
                     <label for="company">Company</label>

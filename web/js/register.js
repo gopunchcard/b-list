@@ -1,6 +1,21 @@
 var urlRoot = 'http://localhost:3010/api';
 
-function onButtonClick() {
+const MAC_ADDRESS_LENGTH = 17;
+var macAddress = document.getElementById("mac");
+macAddress.addEventListener("keyup", formatMac, false);
+
+function formatMac(e) {
+  var r = /([a-f0-9]{2})([a-f0-9]{2})/i,
+    str = e.target.value.replace(/[^a-f0-9]/ig, "");
+
+  while (r.test(str)) {
+    str = str.replace(r, '$1' + ':' + '$2');
+  }
+
+  e.target.value = str.slice(0, 17);
+};
+
+function findMac() {
   /*
   let filters = [];
 
@@ -52,6 +67,10 @@ function saveUser() {
   var name = document.getElementById('name').value;
   var company = document.getElementById('company').value;
 
+  if (!checkValidation(mac, name)) {
+    return false;
+  }
+
   var user = {
     mac,
     room,
@@ -69,13 +88,35 @@ function saveUser() {
   };
 
   fetch(urlRoot + '/user', fetchOptions)
-    .then(showToast());
+    .then(showToastSuccess('Save Success!'));
 }
 
-function showToast() {
+function checkValidation(mac, name) {
+  var valid = true
+
+  var macError = document.getElementById('mac-error');
+  var nameError = document.getElementById('name-error');
+
+  if (mac.length !== MAC_ADDRESS_LENGTH) {
+    macError.innerHTML = 'MAC address is invalid.';
+    valid = false;
+  } else {
+    macError.innerHTML = '';
+  }
+  if (name === "") {
+    nameError.innerHTML = 'Name cannot be empty.';
+    valid = false;
+  } else {
+    nameError.innerHTML = '';
+  }
+
+  return valid;
+}
+
+function showToastSuccess(msg) {
   toastr.options = {
     "positionClass": "toast-custom toast-top-center"
   }
 
-  toastr.success('Save success!');
+  toastr.success(msg);
 }
