@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="../css/style.css" />
+    <title>In/Out Board</title>
+</head>
+
+<body>
+    <div class="main">
+        <div class="corner-logo"><img src="../images/unit-b.svg" alt="corner logo" /></div>
+        <h1 class="title-left">In/Out Board</h1>
+        <div class="unitb-background"></div>
+        <form id="register-form">
+            <div>
+                <label for="mac">mac</label>
+                <input id="mac" type="text" value="" name="mac" />
+            </div>
+            <div>
+                <label for="room">Room</label>
+                <input id="room" type="text" value="" name="room" />
+            </div>
+            <div>
+                <label for="name">Name</label>
+                <input id="name" type="text" value="" name="name" />
+            </div>
+            <div>
+                <label for="company">Company</label>
+                <input id="company" type="text" value="" name="company" />
+            </div>
+        </form>
+        <button id="connect" class="connect-button connect-button--raised" onclick="saveUser()">Get users</button>
+        <div><span id="users"></span></div>
+        <!--<button id="connect" class="connect-button connect-button--raised" onclick="onButtonClick()">Submit</button>-->
+        <div class="flex-spacer"></div>
+        <div class="powered-by"><img src="../images/poweredby-punchcard.svg" alt="powered by punchcard" /></div>
+    </div>
+
+    <script src="../js/register.js"></script>
+</body>
+
+</html>
