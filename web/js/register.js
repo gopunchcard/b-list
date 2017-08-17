@@ -95,19 +95,29 @@ function checkValidation(mac, name) {
   var valid = true
 
   var macError = document.getElementById('mac-error');
+  var macInput = document.getElementById('mac');
   var nameError = document.getElementById('name-error');
-
+  var nameInput = document.getElementById('name');
+  
   if (mac.length !== MAC_ADDRESS_LENGTH) {
     macError.innerHTML = 'MAC address is invalid.';
+    macInput.style.border = '1px solid red';
+    macInput.style.backgroundColor = 'pink';
     valid = false;
   } else {
     macError.innerHTML = '';
+    macInput.style.border = '';
+    macInput.style.backgroundColor = '';
   }
   if (name === "") {
     nameError.innerHTML = 'Name cannot be empty.';
+    nameInput.style.border = '1px solid red';
+    nameInput.style.backgroundColor = 'pink';
     valid = false;
   } else {
     nameError.innerHTML = '';
+    nameInput.style.border = '';
+    nameInput.style.backgroundColor = '';
   }
 
   return valid;
