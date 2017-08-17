@@ -48,6 +48,7 @@ body {
     background: radial-gradient(ellipse at 42% 42%, #3A3A4C 0%, #2D2D38 100%);
     width: calc(100% - 5em);
     height: calc(100% - 5em);
+    min-height: 525px;
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.75);
     position: relative;
     padding: 3em;
